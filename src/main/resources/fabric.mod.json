@@ -1,0 +1,35 @@
+{
+    "schemaVersion": 1,
+    "id": "blend",
+    "version": "${version}",
+    "name": "Blend",
+    "description": "yes",
+    "authors": [
+        "inlinefun"
+    ],
+    "contact": {
+        "issues": "https://github.com/inlinefun/blend/issues",
+        "sources": "https://github.com/inlinefun/blend"
+    },
+    "license": "GPL-3.0",
+    "icon": "assets/blend/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "client": [
+            {
+                "value": "blend.Initializer",
+                "adapter": "kotlin"
+            }
+        ]
+    },
+    "mixins": [
+        "blend.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${loader}",
+        "minecraft": "~${minecraft}",
+        "java": ">=21",
+        "fabric-api": ">=${fabric_api}",
+        "fabric-language-kotlin": ">=${kotlin}"
+    }
+}
