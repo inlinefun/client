@@ -1,9 +1,9 @@
 package blend.api
 
+import io.ktor.server.cio.CIO
 import io.ktor.server.engine.applicationEnvironment
 import io.ktor.server.engine.connector
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
 import org.slf4j.LoggerFactory
 
 object KtorServer {
@@ -15,7 +15,7 @@ object KtorServer {
                 port = 5555
             }
         },
-        factory = Netty,
+        factory = CIO,
         module = {
             configureRouting()
         },

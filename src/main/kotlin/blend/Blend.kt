@@ -1,6 +1,8 @@
 package blend
 
 import blend.api.KtorServer
+import blend.module.ModuleManager
+import blend.util.interfaces.Initializable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
@@ -28,6 +30,10 @@ object Blend {
 
     fun initialize() {
         val preInit = System.currentTimeMillis()
+
+        arrayOf(
+            ModuleManager
+        ).forEach(Initializable::init)
 
         runAsync {
             KtorServer.start()

@@ -25,8 +25,9 @@ dependencies {
     modImplementation(libs.fabric.kotlin)
     modImplementation(libs.fabric.loader)
 
-    implementation(libs.ktor.core)
-    implementation(libs.ktor.netty)
+    library(libs.eventbus)
+    library(libs.ktor.cio)
+    library(libs.ktor.core)
 }
 
 tasks.withType<ProcessResources>().configureEach {
@@ -80,4 +81,27 @@ tasks.register<NpmTask>("buildWebApp") {
 java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
+}
+
+/**
+ * Adds extra dependencies which ktor needs,
+ * Add any transitive dependencies here.
+ */
+afterEvaluate {
+    configurations.runtimeClasspath.get().resolvedConfiguration.resolvedArtifacts.filter {
+        val group = it.moduleVersion.id.group
+        group.startsWith("io.ktor") // filter required transitive dependencies
+    }.forEach { artifact ->
+        val notation = "${artifact.moduleVersion.id.group}:${artifact.moduleVersion.id.name}:${artifact.moduleVersion.id.version}"
+        dependencies.include(notation)
+    }
+}
+
+/**
+ * Only adds the dependency and none of its dependencies.
+ * To add those, modify the afterEvaluate block.
+ */
+fun DependencyHandler.library(lib: Provider<MinimalExternalModuleDependency>) {
+    val dependency = implementation(lib.get()) ?: error("Dependency was null (?)")
+    include(dependency)
 }

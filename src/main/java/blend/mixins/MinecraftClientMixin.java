@@ -1,6 +1,7 @@
 package blend.mixins;
 
 import blend.Blend;
+import blend.event.HandleInputEvent;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,6 +23,16 @@ public class MinecraftClientMixin {
         } catch (Exception e) {
             Blend.INSTANCE.getLogger().error("Error shutting down client", e);
         }
+    }
+
+    @Inject(
+            method = "handleInputEvents",
+            at = @At(
+                    value = "HEAD"
+            )
+    )
+    private void onHandleInputs(CallbackInfo ci) {
+        HandleInputEvent.INSTANCE.call();
     }
 
 }

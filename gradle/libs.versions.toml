@@ -1,4 +1,5 @@
 [versions]
+eventbus = "3.3.1"
 fabric-api = "0.132.0+1.21.8"
 fabric-kotlin = "1.13.5+kotlin.2.2.10"
 fabric-loader = "0.17.2"
@@ -10,6 +11,7 @@ ktor = "3.2.3"
 node-gradle = "7.1.0"
 
 [libraries]
+eventbus = { name = "eventbus-java", group = "org.greenrobot", version.ref = "eventbus" }
 fabric-api = { name = "fabric-api", group = "net.fabricmc.fabric-api", version.ref = "fabric-api" }
 fabric-kotlin = { name = "fabric-language-kotlin", group = "net.fabricmc", version.ref = "fabric-kotlin" }
 fabric-loader = { name = "fabric-loader", group = "net.fabricmc", version.ref = "fabric-loader"}
@@ -17,7 +19,7 @@ mappings = { name = "yarn", group = "net.fabricmc", version.ref = "mappings" }
 minecraft = { name = "minecraft", group = "com.mojang", version.ref = "minecraft" }
 
 ktor-core = { name = "ktor-server-core-jvm", group = "io.ktor", version.ref = "ktor" }
-ktor-netty = { name = "ktor-server-netty", group = "io.ktor", version.ref = "ktor" }
+ktor-cio = { name = "ktor-server-cio", group = "io.ktor", version.ref = "ktor" }
 
 [plugins]
 fabric-loom = { id = "fabric-loom", version.ref = "fabric-loom" }
